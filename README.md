@@ -1,10 +1,10 @@
-# rsync deployments
+# PostgreSQL Proxy over SSH GitHub Action
 
-This GitHub Action deploys files in `GITHUB_WORKSPACE` to a remote folder via rsync over ssh. 
-
-Use this action in a CD workflow which leaves deployable code in `GITHUB_WORKSPACE`.
+This GitHub Action creates a proxy for PostgreSQL over SSH
 
 The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.15.0 (no cache) which results in fast deployments.
+
+from Burnett01/rsync-deployments:
 
 ---
 
@@ -175,33 +175,3 @@ Please note that version 1.0 has reached end of life state.
 + Base image [JoshPiper/rsync-docker](https://github.com/JoshPiper/rsync-docker)
 
 ---
-
-## Media
-
-This action was featured in multiple blogs across the globe:
-
-- https://leobrack.co.uk/blog/2020-02-15-automatically-push-changes-to-your-live-site-with-github-actions
-
-- https://blog.maniak.co/ci-cd-for-wordpress/
-
-- https://elijahverdoorn.com/2020/04/14/automating-deployment-with-github-actions/
-
-- https://www.vektor-inc.co.jp/post/github-actions-deploy/
-
-- https://ews.ink/tech/blog-deploy-2/
-
-- https://webpick.info/automatiser-avec-github-actions/
-
-- https://matthias-andrasch.eu/blog/2021/tutorial-webseite-mittels-github-actions-deployment-zu-uberspace-uebertragen-rsync/
-
-- https://mikael.koutero.me/posts/hugo-github-actions-deploy-rsync/
-
-- https://cdmana.com/2021/02/20210208122400688I.html
-
-- https://jishuin.proginn.com/p/763bfbd38928
-
-- https://cloud.tencent.com/developer/article/1786522
-
-- http://www.ningco.cn/github_action_deploy_blog/
-
-- https://qdmana.com/2021/01/20210127094413405u.html
