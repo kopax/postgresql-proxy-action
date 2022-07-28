@@ -2,7 +2,7 @@
 
 # start SSH agent and load key
 source agent-start "$GITHUB_ACTION"
-echo "$INPUT_REMOTE_KEY" | SSH_PASS = "$INPUT_REMOTE_KEY_PASS" agent-add
+echo "$INPUT_REMOTE_KEY" | SSH_PASS="$INPUT_REMOTE_KEY_PASS" agent-add
 
 # turn on strict errors
 set -eu
