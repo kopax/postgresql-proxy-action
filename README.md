@@ -10,7 +10,7 @@ The base-image (drinternet/rsync) of this action is very small and is based on A
 
 - `postgre_host` - The PostgreSQL server hostname or IP
 
-- `postgre_host` - The PostgreSQL server port
+- `postgre_port` - The PostgreSQL server port
 
 - `remote_host`* - The remote SSH hostname or IP
 
@@ -26,11 +26,9 @@ The base-image (drinternet/rsync) of this action is very small and is based on A
 
 ``* = Required``
 
-from Burnett01/rsync-deployments:
-
 ## Required secret(s)
 
-This action needs secret variables for the ssh private key of your key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. The secret variable should be set in the Github secrets section of your org/repo and then referenced as the  `remote_key` input.
+This action needs secret variables for the SSH private key of your key pair. The public key part should be added to the authorized_keys file on the server that receives the deployment. The secret variable should be set in the Github secrets section of your org/repo and then referenced as the  `remote_key` input.
 
 > Always use secrets when dealing with sensitive inputs!
 
@@ -52,14 +50,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2
+    - name: Setup PostgreSQL proxy
+      uses: virbyte/postgresql-proxy-action
       with:
-        switches: -avzr --delete
-        path: src/
-        remote_path: /var/www/html/
         remote_host: example.com
-        remote_user: debian
+        remote_user: username
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
@@ -71,15 +66,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: rsync deployments
+    - name: Setup PostgreSQL proxy
       uses: burnett01/rsync-deployments@5.2
       with:
-        switches: -avzr --delete --exclude="" --include="" --filter=""
-        path: src/
-        remote_path: /var/www/html/
+        postgre_host: localhost
+        postgre_port: 5432
         remote_host: example.com
-        remote_port: 5555
-        remote_user: debian
+        remote_port: 2222
+        remote_user: username
         remote_key: ${{ secrets.DEPLOY_KEY }}
 ```
 
@@ -123,53 +117,12 @@ jobs:
         remote_key: ${{ secrets.DEPLOY_KEY }}
         remote_key_pass: ${{ secrets.DEPLOY_KEY_PASS }}
 ```
----
-
-## Version 4.0 & 4.1
-
-Looking for version 4.0 and 4.1?
-
-Check here: 
-
-- https://github.com/Burnett01/rsync-deployments/tree/4.0
-- https://github.com/Burnett01/rsync-deployments/tree/4.1
-
-Version 4.0 & 4.1 use the ``drinternet/rsync:1.0.1`` base-image.
-
----
-
-## Version 3.0 (EOL)
-
-Looking for version 3.0?
-
-Check here: https://github.com/Burnett01/rsync-deployments/tree/3.0
-
-Version 3.0 uses the ``alpine:latest`` base-image directly.<br>
-Consider upgrading to 4.0 that uses a docker-image ``drinternet/rsync:1.0.1`` that is<br>
-based on ``alpine:latest``and heavily optimized for rsync.
-
-## Version 2.0 (EOL)
-
-Looking for version 2.0?
-
-Check here: https://github.com/Burnett01/rsync-deployments/tree/2.0
-
-Version 2.0 uses a larger base-image (``ubuntu:latest``).<br>
-Consider upgrading to 3.0 for even faster deployments.
-
-## Version 1.0 (EOL)
-
-Looking for version 1.0?
-
-Check here: https://github.com/Burnett01/rsync-deployments/tree/1.0
-
-Please note that version 1.0 has reached end of life state.
 
 ---
 
 ## Acknowledgements
 
-+ This project is a fork of [Contention/rsync-deployments](https://github.com/Contention/rsync-deployments)
++ This project is a fork of [Burnet01/rsync-deployments](https://github.com/Burnet01/rsync-deployments)
 + Base image [JoshPiper/rsync-docker](https://github.com/JoshPiper/rsync-docker)
 
 ---
