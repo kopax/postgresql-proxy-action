@@ -4,31 +4,29 @@ This GitHub Action creates a proxy for PostgreSQL over SSH
 
 The base-image (drinternet/rsync) of this action is very small and is based on Alpine 3.15.0 (no cache) which results in fast deployments.
 
-from Burnett01/rsync-deployments:
-
 ---
 
 ## Inputs
 
-- `switches`* - The first is for any initial/required rsync flags, eg: `-avzr --delete`
+- `postgre_host` - The PostgreSQL server hostname or IP
 
-- `rsh` - Remote shell commands
+- `postgre_host` - The PostgreSQL server port
 
-- `path` - The source path. Defaults to GITHUB_WORKSPACE
+- `remote_host`* - The remote SSH hostname or IP
 
-- `remote_path`* - The deployment target path
+- `remote_port` - The remote SSH port. Defaults to 22
 
-- `remote_host`* - The remote host
+- `remote_user`* - The remote SSH username
 
-- `remote_port` - The remote port. Defaults to 22
+- `remote_key`* - The remote SSH keyfile
 
-- `remote_user`* - The remote user
+- `remote_key_pass` - The remote SSH keyfile passphrase (if any)
 
-- `remote_key`* - The remote ssh key
-
-- `remote_key_pass` - The remote ssh key passphrase (if any)
+- `switches` - Extra OpenSSH client flags/switches, eg: `-A`
 
 ``* = Required``
+
+from Burnett01/rsync-deployments:
 
 ## Required secret(s)
 
