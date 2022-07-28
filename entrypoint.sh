@@ -7,4 +7,7 @@ echo "$INPUT_REMOTE_KEY" | SSH_PASS="$INPUT_REMOTE_KEY_PASS" agent-add
 # turn on strict errors
 set -eu
 
-sh -c "ssh -o StrictHostKeyChecking=no -f -N -L localhost:$INPUT_POSTGRE_PORT:$INPUT_POSTGRE_HOST:$INPUT_POSTGRE_PORT -p $INPUT_REMOTE_PORT $INPUT_REMOTE_USER@$INPUT_REMOTE_HOST $INPUT_SWITCHES"
+# what ports are open?
+sh -c "netstat -lt"
+
+#sh -c "ssh -o StrictHostKeyChecking=no -f -N -L localhost:$INPUT_POSTGRE_PORT:$INPUT_POSTGRE_HOST:$INPUT_POSTGRE_PORT -p $INPUT_REMOTE_PORT $INPUT_REMOTE_USER@$INPUT_REMOTE_HOST $INPUT_SWITCHES"
