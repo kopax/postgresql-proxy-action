@@ -1,41 +1,37 @@
-name: 'Rsync Deployments Action'
-description: 'GitHub Action for deploying code via rsync over ssh'
-author: 'Burnett01'
+name: 'PostgreSQL Proxy Action'
+description: 'GitHub Action for proxying PostgreSQL over ssh'
+author: 'virbyte'
 inputs:
-  switches:
-    description: 'The switches'
-    required: true
-  rsh:
-    description: 'The remote shell argument'
+  postgre_host:
+    description: 'PostgreSQL host'
     required: false
-    default: ''
-  path:
-    description: 'The local path'
+    default: 'localhost'
+  postgre_port:
+    description: 'PostgreSQL port'
     required: false
-    default: ''
-  remote_path:
-    description: 'The remote path'
-    required: true
+    default: 5432
   remote_host:
-    description: 'The remote host'
+    description: 'Remote SSH host'
     required: true
   remote_port:
-    description: 'The remote port'
+    description: 'Remote SSH port'
     required: false
     default: 22
   remote_user:
-    description: 'The remote user'
+    description: 'Remote username'
     required: true
   remote_key:
-    description: 'The remote key'
+    description: 'Keyfile for remote SSH server'
     required: true
   remote_key_pass:
-    description: 'The remote key passphrase'
+    description: 'Keyfile passphrase'
     required: false
     default: ''
+  switches:
+    description: 'Extra OpenSSH client switches'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
 branding:
-  icon: 'send'  
-  color: 'gray-dark'
+  icon: 'send'
